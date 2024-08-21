@@ -1,10 +1,36 @@
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
-  let choice = Math.random();
-  if (0 <= choice < 1 / 3) {
-    console.log("Rock!");
-  } else if (1 / 3 <= choice < 2 / 3) {
-    console.log("Paper!");
-  } else if (2 / 3 <= choice <= 1) {
-    console.log("Scissors!");
+  let randomInt = Math.floor(Math.random() * 3);
+  switch (randomInt) {
+    case 0:
+      return "Rock!";
+      break;
+    case 1:
+      return "Paper!";
+      break;
+    case 2:
+      return "Scissors!";
+      break;
   }
 }
+
+function getHumanChoice() {
+  let choice = prompt("Please type one of these: Rock, Paper or Scissors.");
+  let lower = choice.toLowerCase();
+  let capChoice = lower.charAt(0).toUpperCase() + lower.slice(1);
+  switch (capChoice) {
+    case "Rock":
+      return "Rock";
+      break;
+    case "Paper":
+      return "Paper";
+      break;
+    case "Scissors":
+      return "Scissors";
+      break;
+  }
+}
+
+function playRound() {}
