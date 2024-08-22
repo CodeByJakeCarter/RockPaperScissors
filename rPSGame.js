@@ -5,11 +5,11 @@ function getComputerChoice() {
   let randomInt = Math.floor(Math.random() * 3);
   switch (randomInt) {
     case 0:
-      return "Rock!";
+      return "Rock";
     case 1:
-      return "Paper!";
+      return "Paper";
     case 2:
-      return "Scissors!";
+      return "Scissors";
   }
 }
 
@@ -21,7 +21,7 @@ function getHumanChoice() {
 }
 
 function playRound(humanSelection, computerSelection) {
-  let outcome;
+  let outcome = 3;
   switch (humanSelection) {
     case "Rock":
       if (computerSelection === "Rock") {
@@ -31,7 +31,7 @@ function playRound(humanSelection, computerSelection) {
       } else if (computerSelection === "Scissors") {
         outcome = 0;
       }
-      break;
+      return outcome;
     case "Paper":
       if (computerSelection === "Rock") {
         outcome = 0;
@@ -40,7 +40,7 @@ function playRound(humanSelection, computerSelection) {
       } else if (computerSelection === "Scissors") {
         outcome = 2;
       }
-      break;
+      return outcome;
     case "Scissors":
       if (computerSelection === "Rock") {
         outcome = 2;
@@ -49,21 +49,24 @@ function playRound(humanSelection, computerSelection) {
       } else if (computerSelection === "Scissors") {
         outcome = 1;
       }
-      break;
+      return outcome;
   }
   switch (outcome) {
     case 0:
-      console.log("You win! You won't next time...");
-      humanScore += 1;
+      console.log(
+        "You win, there must be an error in my code. A rogue ! maybe..."
+      );
+      humanScore = humanScore++;
       return;
     case 1:
-      console.log(
-        "You are my equal this time, there must have been an error..."
-      );
+      console.log("Luck, it seems, is more tangible than I expected.");
       return;
     case 2:
-      computerScore += 1;
-      console.log("You lose! As expected against an intelligent machine.");
+      console.log("As expected against an intelligent Machine.");
+      computerScore = computerScore++;
+      return;
+    default:
+      console.log("ERROR!!!!");
       return;
   }
 }
@@ -72,7 +75,7 @@ function playGame() {
   for (let index = 0; index < 5; index++) {
     let humanChoice = getHumanChoice();
     let computerChoice = getComputerChoice();
-    let result = toString(playRound(humanChoice, computerChoice));
+    let result = playRound(humanChoice, computerChoice);
     console.log(result);
   }
   console.log(
