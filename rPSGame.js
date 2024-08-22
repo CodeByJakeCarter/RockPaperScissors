@@ -33,4 +33,55 @@ function getHumanChoice() {
   }
 }
 
-function playRound() {}
+function playRound(humanChoice, computerChoice) {
+  switch (humanChoice) {
+    case "Rock":
+      if (computerChoice === "Rock") {
+        outcome = 1;
+      } else if (computerChoice === "Paper") {
+        outcome = 2;
+      } else if (computerChoice === "Scissors") {
+        outcome = 0;
+      }
+      break;
+    case "Paper":
+      if (computerChoice === "Rock") {
+        outcome = 0;
+      } else if (computerChoice === "Paper") {
+        outcome = 1;
+      } else if (computerChoice === "Scissors") {
+        outcome = 2;
+      }
+      break;
+    case "Scissors":
+      if (computerChoice === "Rock") {
+        outcome = 2;
+      } else if (computerChoice === "Paper") {
+        outcome = 0;
+      } else if (computerChoice === "Scissors") {
+        outcome = 1;
+      }
+      break;
+  }
+  switch (outcome) {
+    case 0:
+      console.log("You win! You won't next time...");
+      humanScore += 1;
+      break;
+    case 1:
+      console.log(
+        "You are my equal this time, there must have been an error..."
+      );
+      break;
+    case 2:
+      console.log("You lose! As expected against an intelligent machine.");
+      computerScore += 1;
+      break;
+  }
+}
+
+let humanChoice = getHumanChoice();
+let computerChoie = getComputerChoice();
+let outcome = 3;
+
+playRound(humanChoice, computerChoie);
