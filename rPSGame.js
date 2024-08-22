@@ -6,13 +6,10 @@ function getComputerChoice() {
   switch (randomInt) {
     case 0:
       return "Rock!";
-      break;
     case 1:
       return "Paper!";
-      break;
     case 2:
       return "Scissors!";
-      break;
   }
 }
 
@@ -20,45 +17,36 @@ function getHumanChoice() {
   let choice = prompt("Please type one of these: Rock, Paper or Scissors.");
   let lower = choice.toLowerCase();
   let capChoice = lower.charAt(0).toUpperCase() + lower.slice(1);
-  switch (capChoice) {
-    case "Rock":
-      return "Rock";
-      break;
-    case "Paper":
-      return "Paper";
-      break;
-    case "Scissors":
-      return "Scissors";
-      break;
-  }
+  return capChoice;
 }
 
-function playRound(humanChoice, computerChoice) {
-  switch (humanChoice) {
+function playRound(humanSelection, computerSelection) {
+  let outcome;
+  switch (humanSelection) {
     case "Rock":
-      if (computerChoice === "Rock") {
+      if (computerSelection === "Rock") {
         outcome = 1;
-      } else if (computerChoice === "Paper") {
+      } else if (computerSelection === "Paper") {
         outcome = 2;
-      } else if (computerChoice === "Scissors") {
+      } else if (computerSelection === "Scissors") {
         outcome = 0;
       }
       break;
     case "Paper":
-      if (computerChoice === "Rock") {
+      if (computerSelection === "Rock") {
         outcome = 0;
-      } else if (computerChoice === "Paper") {
+      } else if (computerSelection === "Paper") {
         outcome = 1;
-      } else if (computerChoice === "Scissors") {
+      } else if (computerSelection === "Scissors") {
         outcome = 2;
       }
       break;
     case "Scissors":
-      if (computerChoice === "Rock") {
+      if (computerSelection === "Rock") {
         outcome = 2;
-      } else if (computerChoice === "Paper") {
+      } else if (computerSelection === "Paper") {
         outcome = 0;
-      } else if (computerChoice === "Scissors") {
+      } else if (computerSelection === "Scissors") {
         outcome = 1;
       }
       break;
@@ -67,21 +55,29 @@ function playRound(humanChoice, computerChoice) {
     case 0:
       console.log("You win! You won't next time...");
       humanScore += 1;
-      break;
+      return;
     case 1:
       console.log(
         "You are my equal this time, there must have been an error..."
       );
-      break;
+      return;
     case 2:
-      console.log("You lose! As expected against an intelligent machine.");
       computerScore += 1;
-      break;
+      console.log("You lose! As expected against an intelligent machine.");
+      return;
   }
 }
 
-let humanChoice = getHumanChoice();
-let computerChoie = getComputerChoice();
-let outcome = 3;
+function playGame() {
+  for (let index = 0; index < 5; index++) {
+    let humanChoice = getHumanChoice();
+    let computerChoice = getComputerChoice();
+    let result = toString(playRound(humanChoice, computerChoice));
+    console.log(result);
+  }
+  console.log(
+    "Final scores, Human: " + humanScore + ", Computer: " + computerScore
+  );
+}
 
-playRound(humanChoice, computerChoie);
+playGame();
