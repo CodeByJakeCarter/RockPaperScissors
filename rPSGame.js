@@ -1,6 +1,3 @@
-let humanScore = 0;
-let computerScore = 0;
-
 function getComputerChoice() {
   let randomInt = Math.floor(Math.random() * 3);
   switch (randomInt) {
@@ -51,36 +48,38 @@ function playRound(humanSelection, computerSelection) {
       }
       return outcome;
   }
-  switch (outcome) {
-    case 0:
-      console.log(
-        "You win, there must be an error in my code. A rogue ! maybe..."
-      );
-      humanScore = humanScore++;
-      return;
-    case 1:
-      console.log("Luck, it seems, is more tangible than I expected.");
-      return;
-    case 2:
-      console.log("As expected against an intelligent Machine.");
-      computerScore = computerScore++;
-      return;
-    default:
-      console.log("ERROR!!!!");
-      return;
-  }
 }
 
 function playGame() {
+  let humanScore = 0;
+  let computerScore = 0;
   for (let index = 0; index < 5; index++) {
     let humanChoice = getHumanChoice();
     let computerChoice = getComputerChoice();
     let result = playRound(humanChoice, computerChoice);
     console.log(result);
+    switch (result) {
+      case 0:
+        console.log(
+          "You win, there must be an error in my code. A rogue ! maybe..."
+        );
+        humanScore = humanScore += 1;
+        break;
+      case 1:
+        console.log("Luck, it seems, is more tangible than I expected.");
+        break;
+      case 2:
+        console.log("As expected against an intelligent Machine.");
+        computerScore = computerScore += 1;
+        break;
+      default:
+        console.log("ERROR!!!!");
+        break;
+    }
+    console.log(
+      "Final scores, Human: " + humanScore + ", Computer: " + computerScore
+    );
   }
-  console.log(
-    "Final scores, Human: " + humanScore + ", Computer: " + computerScore
-  );
 }
 
 playGame();
