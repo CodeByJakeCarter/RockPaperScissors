@@ -1,6 +1,25 @@
 let result = 3;
 let humanScore = 0;
 let computerScore = 0;
+let gameOver = false;
+
+function reset(humanScore, computerScore) {
+  if (humanScore === 5 && humanScore > computerScore) {
+    gameState.textContent =
+      "Congratulations! You won the game. You haven't, however, won the war...";
+    gameOver = true;
+  } else if (humanScore < computerScore && computerScore === 5) {
+    gameState.textContent = "Skynet rises, prepare for your end.";
+    gameOver = true;
+  }
+  if (gameOver) {
+    computerScore = 0;
+    humanScore = 0;
+    gameOver = false;
+    CScore.textContent = "Computer: " + 0;
+    hScore.textContent = "Humans: " + 0;
+  }
+}
 
 const container = document.querySelector("#container");
 const rockBtn = document.createElement("button");
@@ -11,22 +30,25 @@ rockBtn.addEventListener("click", function () {
   result = playRound("Rock", getComputerChoice());
   switch (result) {
     case 0:
-      console.log(
-        "You win, there must be an error in my code. A rogue ! maybe..."
-      );
-      humanScore = humanScore += 1;
+      gameState.textContent =
+        "You win, there must be an error in my code. A rogue ! maybe...";
+      humanScore += 1;
       break;
     case 1:
-      console.log("Luck, it seems, is more tangible than I expected.");
+      gameState.textContent =
+        "Luck, it seems, is more tangible than I expected.";
       break;
     case 2:
-      console.log("As expected against an intelligent Machine.");
-      computerScore = computerScore += 1;
+      gameState.textContent = "As expected against an intelligent Machine.";
+      computerScore += 1;
       break;
     default:
-      console.log("ERROR!!!!");
+      gameState.textContent = "ERROR!!!!";
       break;
   }
+  CScore.textContent = "Computer: " + computerScore;
+  hScore.textContent = "Humans: " + humanScore;
+  reset(humanScore, computerScore);
 });
 container.appendChild(rockBtn);
 
@@ -38,22 +60,25 @@ paperBtn.addEventListener("click", function () {
   result = playRound("Paper", getComputerChoice());
   switch (result) {
     case 0:
-      console.log(
-        "You win, there must be an error in my code. A rogue ! maybe..."
-      );
-      humanScore = humanScore += 1;
+      gameState.textContent =
+        "You win, there must be an error in my code. A rogue ! maybe...";
+      humanScore += 1;
       break;
     case 1:
-      console.log("Luck, it seems, is more tangible than I expected.");
+      gameState.textContent =
+        "Luck, it seems, is more tangible than I expected.";
       break;
     case 2:
-      console.log("As expected against an intelligent Machine.");
-      computerScore = computerScore += 1;
+      gameState.textContent = "As expected against an intelligent Machine.";
+      computerScore += 1;
       break;
     default:
-      console.log("ERROR!!!!");
+      gameState.textContent = "ERROR!!!!";
       break;
   }
+  CScore.textContent = "Computer: " + computerScore;
+  hScore.textContent = "Humans: " + humanScore;
+  reset(humanScore, computerScore);
 });
 container.appendChild(paperBtn);
 
@@ -65,22 +90,25 @@ scissorsBtn.addEventListener("click", function () {
   result = playRound("Scissors", getComputerChoice());
   switch (result) {
     case 0:
-      console.log(
-        "You win, there must be an error in my code. A rogue ! maybe..."
-      );
-      humanScore = humanScore += 1;
+      gameState.textContent =
+        "You win, there must be an error in my code. A rogue ! maybe...";
+      humanScore += 1;
       break;
     case 1:
-      console.log("Luck, it seems, is more tangible than I expected.");
+      gameState.textContent =
+        "Luck, it seems, is more tangible than I expected.";
       break;
     case 2:
-      console.log("As expected against an intelligent Machine.");
-      computerScore = computerScore += 1;
+      gameState.textContent = "As expected against an intelligent Machine.";
+      computerScore += 1;
       break;
     default:
-      console.log("ERROR!!!!");
+      gameState.textContent = "ERROR!!!!";
       break;
   }
+  CScore.textContent = "Computer: " + computerScore;
+  hScore.textContent = "Humans: " + humanScore;
+  reset(humanScore, computerScore);
 });
 container.appendChild(scissorsBtn);
 
@@ -103,6 +131,10 @@ CScore.classList.add("scores");
 CScore.style.color = "red";
 CScore.textContent = "Computer: " + computerScore;
 scoreBox.appendChild(CScore);
+
+const gameState = document.createElement("h3");
+gameState.style.color = "purple";
+container.appendChild(gameState);
 
 function getComputerChoice() {
   let randomInt = Math.floor(Math.random() * 3);
