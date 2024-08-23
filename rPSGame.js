@@ -1,3 +1,109 @@
+let result = 3;
+let humanScore = 0;
+let computerScore = 0;
+
+const container = document.querySelector("#container");
+const rockBtn = document.createElement("button");
+rockBtn.classList.add("rockButton");
+rockBtn.textContent = "Rock";
+rockBtn.value = "Rock";
+rockBtn.addEventListener("click", function () {
+  result = playRound("Rock", getComputerChoice());
+  switch (result) {
+    case 0:
+      console.log(
+        "You win, there must be an error in my code. A rogue ! maybe..."
+      );
+      humanScore = humanScore += 1;
+      break;
+    case 1:
+      console.log("Luck, it seems, is more tangible than I expected.");
+      break;
+    case 2:
+      console.log("As expected against an intelligent Machine.");
+      computerScore = computerScore += 1;
+      break;
+    default:
+      console.log("ERROR!!!!");
+      break;
+  }
+});
+container.appendChild(rockBtn);
+
+const paperBtn = document.createElement("button");
+paperBtn.classList.add("paperButton");
+paperBtn.textContent = "Paper";
+paperBtn.value = "Paper";
+paperBtn.addEventListener("click", function () {
+  result = playRound("Paper", getComputerChoice());
+  switch (result) {
+    case 0:
+      console.log(
+        "You win, there must be an error in my code. A rogue ! maybe..."
+      );
+      humanScore = humanScore += 1;
+      break;
+    case 1:
+      console.log("Luck, it seems, is more tangible than I expected.");
+      break;
+    case 2:
+      console.log("As expected against an intelligent Machine.");
+      computerScore = computerScore += 1;
+      break;
+    default:
+      console.log("ERROR!!!!");
+      break;
+  }
+});
+container.appendChild(paperBtn);
+
+const scissorsBtn = document.createElement("button");
+scissorsBtn.classList.add("scissorsButton");
+scissorsBtn.textContent = "Scissors";
+scissorsBtn.value = "Scissors";
+scissorsBtn.addEventListener("click", function () {
+  result = playRound("Scissors", getComputerChoice());
+  switch (result) {
+    case 0:
+      console.log(
+        "You win, there must be an error in my code. A rogue ! maybe..."
+      );
+      humanScore = humanScore += 1;
+      break;
+    case 1:
+      console.log("Luck, it seems, is more tangible than I expected.");
+      break;
+    case 2:
+      console.log("As expected against an intelligent Machine.");
+      computerScore = computerScore += 1;
+      break;
+    default:
+      console.log("ERROR!!!!");
+      break;
+  }
+});
+container.appendChild(scissorsBtn);
+
+const scoreBox = document.createElement("div");
+scoreBox.classList.add("scoreBox");
+scoreBox.textContent = "Current Scores:";
+scoreBox.style.borderColor = "green";
+scoreBox.style.borderRadius = "5px";
+scoreBox.style.borderStyle = "solid";
+container.appendChild(scoreBox);
+
+const hScore = document.createElement("p");
+hScore.classList.add("scores");
+hScore.style.color = "blue";
+hScore.textContent = "Humans: " + humanScore;
+scoreBox.appendChild(hScore);
+
+const CScore = document.createElement("p");
+CScore.classList.add("scores");
+CScore.style.color = "red";
+CScore.textContent = "Computer: " + computerScore;
+scoreBox.appendChild(CScore);
+
 function getComputerChoice() {
   let randomInt = Math.floor(Math.random() * 3);
   switch (randomInt) {
@@ -8,13 +114,6 @@ function getComputerChoice() {
     case 2:
       return "Scissors";
   }
-}
-
-function getHumanChoice() {
-  let choice = prompt("Please type one of these: Rock, Paper or Scissors.");
-  let lower = choice.toLowerCase();
-  let capChoice = lower.charAt(0).toUpperCase() + lower.slice(1);
-  return capChoice;
 }
 
 function playRound(humanSelection, computerSelection) {
@@ -28,6 +127,7 @@ function playRound(humanSelection, computerSelection) {
       } else if (computerSelection === "Scissors") {
         outcome = 0;
       }
+      console.log(outcome);
       return outcome;
     case "Paper":
       if (computerSelection === "Rock") {
@@ -37,6 +137,7 @@ function playRound(humanSelection, computerSelection) {
       } else if (computerSelection === "Scissors") {
         outcome = 2;
       }
+      console.log(outcome);
       return outcome;
     case "Scissors":
       if (computerSelection === "Rock") {
@@ -46,40 +147,8 @@ function playRound(humanSelection, computerSelection) {
       } else if (computerSelection === "Scissors") {
         outcome = 1;
       }
+      console.log(outcome);
       return outcome;
   }
+  console.log(outcome);
 }
-
-function playGame() {
-  let humanScore = 0;
-  let computerScore = 0;
-  for (let index = 0; index < 5; index++) {
-    let humanChoice = getHumanChoice();
-    let computerChoice = getComputerChoice();
-    let result = playRound(humanChoice, computerChoice);
-    console.log(result);
-    switch (result) {
-      case 0:
-        console.log(
-          "You win, there must be an error in my code. A rogue ! maybe..."
-        );
-        humanScore = humanScore += 1;
-        break;
-      case 1:
-        console.log("Luck, it seems, is more tangible than I expected.");
-        break;
-      case 2:
-        console.log("As expected against an intelligent Machine.");
-        computerScore = computerScore += 1;
-        break;
-      default:
-        console.log("ERROR!!!!");
-        break;
-    }
-    console.log(
-      "Final scores, Human: " + humanScore + ", Computer: " + computerScore
-    );
-  }
-}
-
-playGame();
